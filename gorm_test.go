@@ -435,7 +435,7 @@ func TestSoftDelete(t *testing.T)  {
 
 func TestUnscope(t *testing.T)  {
 	var todo Todo
-	err := db.Unscoped().First(&todo, "id = ?", 1).Error
+	err := db.Unscoped().First(&todo, "id = ?", 3).Error
 	assert.Nil(t, err)
 	fmt.Println(todo)
 

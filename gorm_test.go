@@ -1,6 +1,7 @@
 package golang_gorm
 
 import (
+	"context"
 	"fmt"
 	"strconv"
 	"testing"
@@ -778,4 +779,13 @@ func TestAggregationGroupByAndHaving(t *testing.T)  {
 		Find(&results).Error
 	assert.Nil(t, err)
 	assert.Equal(t, 0, len(results))
+}
+
+func TestContext(t *testing.T)  {
+	ctx := context.Background()
+
+	var users []User
+	err := db.WithContext(ctx).Find(&users).Error
+	assert.Nil(t, err)
+	assert.Equal(t, 17, len(users))
 }

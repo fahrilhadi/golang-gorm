@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"strconv"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
 	"gorm.io/driver/mysql"
@@ -21,6 +22,16 @@ func OpenConnection() *gorm.DB {
 	if err != nil {
 		panic(err)
 	}
+
+	sqlDb, err := db.DB()
+	if err != nil {
+		panic(err)
+	}
+
+	sqlDb.SetMaxOpenConns(100)
+	sqlDb.SetMaxIdleConns(10)
+	sqlDb.SetConnMaxLifetime(30 * time.Minute)
+	sqlDb.SetConnMaxIdleTime(5 * time.Minute)
 
 	return db
 }

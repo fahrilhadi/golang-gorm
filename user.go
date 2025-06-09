@@ -15,6 +15,7 @@ type User struct {
 	Information string `gorm:"-"`
 	Wallet Wallet `gorm:"foreignKey:user_id;references:id"`
 	Addresses []Address `gorm:"foreignKey:user_id;references:id"`
+	LikeProducts []Product `gorm:"many2many:user_like_product;foreignKey:id;joinForeignKey:user_id;references:id;joinReferences:product_id"`
 }
 
 func (u *User) TableName() string {
